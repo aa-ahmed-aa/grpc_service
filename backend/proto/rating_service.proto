@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package rating;
+
+option go_package = "github.com/aa-ahmed-aa/zendesk_grpc_service/proto;rating";
+
+service RatingService {
+  rpc OverallScore (DateRangeRequest) returns (ScoreResponse);
+  rpc ScoreChange (ScoreChangeRequest) returns (ScoreChangeResponse);
+  rpc CategoryScores (DateRangeRequest) returns (CategoryScoresResponse);
+  rpc TicketScores (DateRangeRequest) returns (TicketScoresResponse);
+}
+
+message DateRangeRequest {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message ScoreResponse {
+  double score = 1;
+}
+
+message ScoreChangeRequest {
+  string current_start = 1;
+  string current_end = 2;
+  string previous_start = 3;
+  string previous_end = 4;
+}
+
+message ScoreChangeResponse {
+  double current_score = 1;
+  double previous_score = 2;
+  double change = 3;
+}
+
+message CategoryScore {
+  string category = 1;
+  map<string, double> scores_by_date = 2;
+  double average_score = 3;
+  int32 ratings_count = 4;
+}
+
+message CategoryScoresResponse {
+  repeated CategoryScore categories = 1;
+}
+
+message TicketScore {
+  string ticket_id = 1;
+  map<string, double> category_scores = 2;
+}
+
+message TicketScoresResponse {
+  repeated TicketScore tickets = 1;
+}

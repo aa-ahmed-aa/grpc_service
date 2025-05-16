@@ -1,0 +1,7 @@
+.git
+*.db
+*.md
+*.log
+vendor/
+tmp/
+bin/
