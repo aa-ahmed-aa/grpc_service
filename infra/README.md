@@ -1,4 +1,4 @@
-# Kubernetes Deployment for zendesk-grpc-service
+# Kubernetes Deployment
 
 latest image of the codebase is pushed to dockerhub at [ahmedkhd36/zendesk-grpc-service](https://hub.docker.com/r/ahmedkhd36/zendesk-grpc-service)
 

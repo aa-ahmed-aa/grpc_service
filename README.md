@@ -16,11 +16,12 @@ Using docker
 
 Using kubectl 
 ```bash
-./deploy.sh #for more details what and how this shell works check [this]()
+./deploy.sh #for more details what and how this shell works check [this](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/infra/README.md)
 ```
 ## folder structure
 ```
 .
+└── infra/              # K8s resource objects
 └── internal/
 │   └── common/
 │       ├── db.go       # db utiliitly
