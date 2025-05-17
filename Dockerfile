@@ -1,26 +1,29 @@
-# Use official Golang image as builder
-FROM golang:1.21 as builder
+# syntax=docker/dockerfile:1
 
+# Build stage
+FROM golang:1.24.3-alpine AS builder
 WORKDIR /app
 
-# Copy go.mod and download dependencies
+# Install build dependencies for CGO
+RUN apk add --no-cache gcc musl-dev
+
 COPY go.mod go.sum ./
 RUN go mod download
-
-# Copy source code
 COPY . .
 
-# Build the Go app
-RUN go build -o grpc-server main.go
+# Enable CGO for sqlite3 and set target architecture
+ARG TARGETOS
+ARG TARGETARCH
+ENV CGO_ENABLED=1
+RUN GOARCH=$TARGETARCH GOOS=$TARGETOS go build -o server main.go
 
-# Use minimal image for final stage
-FROM gcr.io/distroless/base-debian11
-
+# Runtime stage
+FROM alpine:latest
 WORKDIR /app
 
-# Copy the compiled binary from the builder stage
-COPY --from=builder /app/grpc-server .
-COPY --from=builder /app/database.db .
+# Install runtime dependencies for sqlite3
+RUN apk add --no-cache libstdc++ sqlite-libs
 
-# Command to run the executable
-ENTRYPOINT ["/app/grpc-server"]
+COPY --from=builder /app/server ./
+EXPOSE 50051
+ENTRYPOINT ["/app/server"]

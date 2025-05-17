@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package rating;
 
-option go_package = "github.com/aa-ahmed-aa/zendesk_grpc_service/proto;rating";
+option go_package = "zendesk_grpc_service/proto";
 
 service RatingService {
-  rpc OverallScore (DateRangeRequest) returns (ScoreResponse);
-  rpc ScoreChange (ScoreChangeRequest) returns (ScoreChangeResponse);
   rpc CategoryScores (DateRangeRequest) returns (CategoryScoresResponse);
   rpc TicketScores (DateRangeRequest) returns (TicketScoresResponse);
+  rpc OverallScore (DateRangeRequest) returns (ScoreResponse);
+  rpc ScoreChange (ScoreChangeRequest) returns (ScoreChangeResponse);
 }
 
 message DateRangeRequest {
