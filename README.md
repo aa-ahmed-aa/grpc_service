@@ -1,5 +1,5 @@
 ## Ticket ratings
-This is a gRPC service to fetch ratings of tickets - home assignment for Zendesk task
+This is a gRPC service to fetch ratings of tickets - home assignment for [Zendesk task](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/TASK.md)
 
 
 rating algorithm percentage = ( (rating * weight) / (max_rating(5) * weight) ) * 100
@@ -15,6 +15,9 @@ Using docker
 ``` 
 
 Using kubectl 
+```bash
+./deploy.sh #for more details what and how this shell works check [this]()
+```
 ## folder structure
 ```
 .

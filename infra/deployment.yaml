@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zendesk-grpc-service
+  labels:
+    app: zendesk-grpc-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zendesk-grpc-service
+  template:
+    metadata:
+      labels:
+        app: zendesk-grpc-service
+    spec:
+      containers:
+        - name: zendesk-grpc-service
+          image: ahmedkhd36/zendesk-grpc-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 50051
+          volumeMounts:
+            - name: db-volume
+              mountPath: /app/database.db
+              subPath: database.db
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+      volumes:
+        - name: db-volume
+          persistentVolumeClaim:
+            claimName: zendesk-db-pvc 
