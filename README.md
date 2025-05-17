@@ -11,12 +11,14 @@ You can choose one of those methods:
 
 🐳 **Using Docker**
 ```bash
+  cd ./zendesk_grpc_service
+
   docker build -t zendesk-grpc-service .
 
   docker run -p 50051:50051 -v $(pwd)/database.db:/app/database.db zendesk-grpc-service -n zendesk-grpc-service -rm
 ``` 
 
-☸️ **Using kubectl**
+☸️ **For Kubernetes**
 ```bash
 ./deploy.sh #for more details what and how this shell works check [this](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/infra/K8S_SETUP.md)
 ```
@@ -65,19 +67,19 @@ grpcurl -plaintext \
 │   └── common/
 │       ├── db.go       # 🗄️ db utiliitly
 │   └── rating/
-│       ├── ratingService.go  # 🛠️ gRPC service implementation of business logic
-│       └── ratingRepository  # 📊 the repository to execute rating sql query 
-├── main.go             # 🚦 Only server startup logic
+│       ├── ratingService.go
+│       └── ratingRepository
+├── main.go
 ├── proto/
 │   └── ratingService/
 │       └── v1/
 │           ├── rating_service.proto
 │           ├── rating_service.pb.go
 │           └── rating_service_grpc.pb.go
-``
+```
 
 ## 📝 Commands
-- 🔄 Generate the go code from the proto buff lib - run this if you do any change to the `.proto` file
+- 🔄 Generate the go code from the proto buff files - run this if you do any change to the `.proto` file
 ```bash
 protoc \
   --go_out=. --go_opt=paths=source_relative \
