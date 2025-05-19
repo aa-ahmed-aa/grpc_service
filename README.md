@@ -86,7 +86,7 @@ grpcurl -plaintext \
 ```
 
 ## 📝 Commands
-- 🔄 Generate the go code from the proto buff files - run this if you do any change to the `.proto` file
+🔄 Generate the go code from the proto buff files - run this if you do any change to the `.proto` file
 ```bash
 protoc \
   --go_out=. --go_opt=paths=source_relative \
