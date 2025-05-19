@@ -1,5 +1,5 @@
 # 🚀 Ticket ratings
-This is a gRPC service to fetch ratings of tickets - home assignment for [Zendesk task](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/TASK.md)
+This is a gRPC service to fetch ratings of tickets - assignment for [Zendesk task](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/TASK.md)
 
 🧮 **Rating algorithm percentage:**
 ```
@@ -19,8 +19,15 @@ You can choose one of those methods:
 ``` 
 
 ☸️ **For Kubernetes**
+- execute this to launch the application
 ```bash
-./deploy.sh #for more details what and how this shell works check [this](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/infra/K8S_SETUP.md)
+./deploy.sh
+```
+For more details on what and how this shell works check [this](https://github.com/aa-ahmed-aa/zendesk_grpc_service/blob/master/infra/K8S_SETUP.md)
+
+- cleanup the resources 
+```bash
+kubectl delete -f ./infra && kubectl delete pod db-copier
 ```
 
 ## 🧪 Test grpc requests
